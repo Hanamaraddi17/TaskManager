@@ -13,6 +13,7 @@ app.use(cors({
   origin: "https://taskmanager17.vercel.app",
   methods: "GET,POST,PUT,DELETE",
   credentials: true
+  
 }));
 
 const mongoUrl = process.env.MONGODB_URL || "mongodb://localhost:27017/"
