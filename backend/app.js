@@ -9,7 +9,11 @@ const taskRoutes = require("./routes/taskRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://taskmanager17.vercel.app",
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
+}));
 
 const mongoUrl = process.env.MONGODB_URL || "mongodb://localhost:27017/"
 mongoose.connect(mongoUrl, err => {
