@@ -45,8 +45,14 @@ export const saveProfile = (token) => async (dispatch) => {
     console.log("Fetching profile with token:", token);
 
     const { data } = await api.get('/profile', {
-      headers: { Authorization: `Bearer ${token}` }  // Ensure proper format
+      headers: { Authorization: token }
     });
+      
+      dispatch({
+        type: SAVE_PROFILE,
+        payload: { user: data.user, token },
+      });
+    
 
     console.log("Profile data received:", data);
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import Loader from './utils/Loader';
 import Tooltip from './utils/Tooltip';
+import ChatWindow from '../pages/ChatWindow'
 
 const priorityColors = {
   High: 'bg-red-600 text-white',
@@ -142,6 +143,7 @@ const Tasks = () => {
             </div>
 
             {/* Task Actions */}
+            <ChatWindow/>
             <div className="mt-5 flex items-center justify-end gap-4">
               <Tooltip text="Edit Task" position="top">
                 <Link
