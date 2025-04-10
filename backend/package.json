@@ -15,11 +15,13 @@
   "description": "The backend part of simple task manager with user authentication",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "chart.js": "^4.4.8",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.2.3"
+    "mongoose": "^6.2.3",
+    "react-chartjs-2": "^5.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

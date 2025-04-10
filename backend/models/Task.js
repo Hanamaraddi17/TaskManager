@@ -1,9 +1,11 @@
+// models/task.js
+
 const mongoose = require("mongoose");
 
 const taskSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User", // Make sure your user model is named 'User'
     required: true
   },
   title: {
@@ -39,4 +41,5 @@ const taskSchema = new mongoose.Schema({
 });
 
 const Task = mongoose.model("Task", taskSchema);
+
 module.exports = Task;

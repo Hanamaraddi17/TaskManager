@@ -19,7 +19,6 @@ const ChatWindow = () => {
 
   const messageEndRef = useRef(null);
 
-  // Auto-scroll to latest message
   const scrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -28,7 +27,6 @@ const ChatWindow = () => {
     scrollToBottom();
   }, [messages, activeChat]);
 
-  // Fetch users on mount
   useEffect(() => {
     console.log('Fetching users...');
     fetchUsers({
@@ -40,13 +38,11 @@ const ChatWindow = () => {
 
   const users = userData || [];
 
-  // Fetch messages when chat selected
   const handleSelectChat = async (chatId) => {
     setActiveChat(chatId);
     if (chatId === 'team') return;
 
     try {
-      // console.log(`🚀 Fetching messages with user ID: ${chatId}`);
       const response = await fetchMessages({
         method: 'GET',
         url: `/chat/user/${chatId}`,
@@ -67,9 +63,7 @@ const ChatWindow = () => {
       console.error('❌ Error fetching messages for user:', chatId, error);
     }
   };
-  
 
-  // Handle sending message
   const handleSend = async () => {
     if (!input.trim()) return;
 
@@ -88,8 +82,6 @@ const ChatWindow = () => {
         data: { text: input, chatType, receiverId },
       });
 
-      // console.log('✅ Message sent successfully.');
-
       setMessages((prevMessages) => ({
         ...prevMessages,
         [activeChat]: [...(prevMessages[activeChat] || []), newMsg],
@@ -101,9 +93,9 @@ const ChatWindow = () => {
     }
   };
 
-  // Filter users
+  // ✅ FIX: Handle missing user.name safely
   const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+    (user?.name || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -123,6 +115,7 @@ const ChatWindow = () => {
             {/* Sidebar */}
             <div className="w-1/4 bg-gray-900 text-white p-4 flex flex-col">
               <h2 className="text-xl font-semibold mb-4">Chats</h2>
+
               {/* Search Bar */}
               <input
                 type="text"
@@ -131,6 +124,7 @@ const ChatWindow = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="p-2 mb-4 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-300"
               />
+
               {/* Team Chat */}
               <div
                 onClick={() => handleSelectChat('team')}
@@ -140,7 +134,9 @@ const ChatWindow = () => {
               >
                 🧑‍🤝‍🧑 Team Chat
               </div>
+
               <hr className="my-2 border-gray-700" />
+
               {/* User List */}
               <div className="overflow-y-auto flex-1">
                 {filteredUsers.length > 0 ? (
@@ -152,7 +148,7 @@ const ChatWindow = () => {
                         activeChat === user._id ? 'bg-gray-700' : 'hover:bg-gray-800'
                       }`}
                     >
-                      👤 {user.name}
+                      👤 {user.name || 'Unnamed User'}
                     </div>
                   ))
                 ) : (
@@ -171,7 +167,7 @@ const ChatWindow = () => {
                     : `👤 Chat with ${users.find((u) => u._id === activeChat)?.name || 'User'}`}
                 </h2>
                 <button onClick={() => setIsChatOpen(false)} className="text-gray-500 hover:text-gray-800">
-                ❌
+                  ❌
                 </button>
               </div>
 

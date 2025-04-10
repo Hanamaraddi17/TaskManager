@@ -31,6 +31,7 @@ const Home = () => {
             <i className="fa-solid fa-arrow-right"></i>
           </Link>
         </div>
+        
       ) : (
         <div className="p-8">
           <h1 className="text-4xl font-bold text-blue-700 mb-6">
@@ -41,6 +42,8 @@ const Home = () => {
           </div>
         </div>
       )}
+
+      
 
       {/* Main Content Sections */}
       <div className="mt-16 space-y-16">

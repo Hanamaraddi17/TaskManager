@@ -5,6 +5,8 @@ import Task from "./pages/Task";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Admin from './pages/Admin';
+import AdminDashboard from './pages/admin-dashboard'; // ✅ case-sensitive!
 import { saveProfile } from "./redux/actions/authActions";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +29,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={authState.isLoggedIn ? <Navigate to="/" /> : <Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<Admin />} /> 
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/tasks/add" element={authState.isLoggedIn ? <Task /> : <Navigate to="/login" state={{ redirectUrl: "/tasks/add" }} />} />
           <Route path="/tasks/:taskId" element={authState.isLoggedIn ? <Task /> : <Navigate to="/login" state={{ redirectUrl: window.location.pathname }} />} />
           <Route path="*" element={<NotFound />} />
