@@ -9,6 +9,7 @@ import Admin from './pages/Admin';
 import AdminDashboard from './pages/admin-dashboard'; // ✅ case-sensitive!
 import { saveProfile } from "./redux/actions/authActions";
 import NotFound from "./pages/NotFound";
+import ManagerDashboard from './pages/ManagerDashboard';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} /> 
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/manager-dashboard" element={<ManagerDashboard />} />
           <Route path="/tasks/add" element={authState.isLoggedIn ? <Task /> : <Navigate to="/login" state={{ redirectUrl: "/tasks/add" }} />} />
           <Route path="/tasks/:taskId" element={authState.isLoggedIn ? <Task /> : <Navigate to="/login" state={{ redirectUrl: window.location.pathname }} />} />
           <Route path="*" element={<NotFound />} />

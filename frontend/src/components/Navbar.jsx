@@ -20,7 +20,7 @@ const Navbar = () => {
           {/* Show Admin Login only when not logged in */}
           {!authState.isLoggedIn && (
             <li className='py-2 px-3 text-primary hover:bg-gray-100 transition rounded-sm'>
-              <Link to="/admin">Admin Login</Link>
+              <Link to="/admin">Admin & Manager Login</Link>
             </li>
           )}
 
